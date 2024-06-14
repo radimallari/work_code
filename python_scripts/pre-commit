@@ -1,0 +1,12 @@
+#!/bin/sh
+
+CURRENT_DIRECTORY=$(dirname $(readlink -f $0))
+
+while test ! -f "$CURRENT_DIRECTORY/tools/git/pre-commit.py";
+    do
+        CURRENT_DIRECTORY=$(dirname $CURRENT_DIRECTORY)
+    done
+
+# CURRENT_DIRECTORY is used to pass as an argument to
+# the master pre-commit.py script in the project directory.
+$TRAPY_VENV/Scripts/python.exe "$CURRENT_DIRECTORY/tools/git/pre-commit.py" $(dirname $(readlink -f $0))
